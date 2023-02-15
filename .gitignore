@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.cr/personal/Editor/Painting
+/.vs
+/TodoList-SQL2/bin/Debug/net6.0
+/TodoList-SQL2/obj
+/TodoList.DataAccess/bin/Debug/net6.0
+/TodoList.DataAccess/obj
+/TodoList.Database/obj/Debug

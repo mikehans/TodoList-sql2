@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList-SQL2", "TodoList-SQL2\TodoList-SQL2.csproj", "{A8BB8154-94B0-49A1-B187-D8C3D89C54D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TodoList.DataAccess", "TodoList.DataAccess\TodoList.DataAccess.csproj", "{C646C3D0-D9AF-404C-A147-23EE7B63E37B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A8BB8154-94B0-49A1-B187-D8C3D89C54D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BB8154-94B0-49A1-B187-D8C3D89C54D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BB8154-94B0-49A1-B187-D8C3D89C54D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BB8154-94B0-49A1-B187-D8C3D89C54D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C646C3D0-D9AF-404C-A147-23EE7B63E37B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C646C3D0-D9AF-404C-A147-23EE7B63E37B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C646C3D0-D9AF-404C-A147-23EE7B63E37B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C646C3D0-D9AF-404C-A147-23EE7B63E37B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {38BC8B91-2913-4B18-8D62-7D47741E9A34}
+	EndGlobalSection
+EndGlobal
