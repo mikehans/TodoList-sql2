@@ -1,24 +1,46 @@
 ﻿using Microsoft.Data.SqlClient;
 using Dapper;
 using System.Data;
+using TodoList.DataAccess.Models;
+using Microsoft.Extensions.Configuration;
 
-namespace TodoList.DataAccess; public class DataAccess : IDataAccess
+namespace TodoList.DataAccess;
+
+public class DataAccess : IDataAccess
 {
-    public IDbConnection CreateSqlServerConnection()
-    {
-        var cnString = @"Server=.\MSSQLSERVER;Database=TodoList;Trusted_Connection=True;";
-        return new SqlConnection(cnString);
-    }
+    private readonly string _cnString;
 
-    public IEnumerable<dynamic> GetAll()
+    public DataAccess(IConfiguration configuration)
+    {
+        var cnstr = configuration.GetConnectionString("DefaultConnection");
+        if(String.IsNullOrEmpty(cnstr)){
+            throw new Exception("No DefaultConnection in connection strings");
+        }
+        _cnString = cnstr;
+    }
+    public IEnumerable<TodoItem> GetAll()
     {
         var sql = "SELECT * FROM TodoList";
 
-        using IDbConnection cn = CreateSqlServerConnection();
+        using IDbConnection cn = new SqlConnection(_cnString);
 
-        IEnumerable<dynamic> result = cn.Query(sql, commandType: CommandType.Text);
+        IEnumerable<TodoItem> result = cn.Query<TodoItem>(sql, commandType: CommandType.Text);
 
         return result;
     }
 
+    public int CreateTodo()
+    {
+        using IDbConnection cn = new SqlConnection(_cnString);
+
+        var newTodo = new TodoItemForInsert()
+        {
+            Title = "Feed the lion",
+            Description = "With the horse"
+        };
+
+        int v = cn.Execute("sp_CreateTodo", newTodo, commandType: CommandType.StoredProcedure);
+
+        return v;
+    }
 }

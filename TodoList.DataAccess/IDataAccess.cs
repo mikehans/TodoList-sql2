@@ -1,10 +1,12 @@
 ﻿using System.Data;
+using TodoList.DataAccess.Models;
 
 namespace TodoList.DataAccess
 {
     public interface IDataAccess
     {
-        IDbConnection CreateSqlServerConnection();
-        IEnumerable<dynamic> GetAll();
+        IEnumerable<TodoItem> GetAll();
+
+        int CreateTodo();
     }
 }
