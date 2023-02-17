@@ -3,13 +3,28 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TodoList.DataAccess;
 using TodoList.DataAccess.Models;
+using TodoList.DataAccess.SqlServer;
+using TodoList.DataAccess.Sqlite;
 
 var host = Host.CreateDefaultBuilder(args).ConfigureServices(
     services =>
     {
         services.AddSingleton<IDataAccess, DataAccess>();
+        services.AddSingleton<DataAccess.CreateDbConnection>((serviceProvider) =>
+        {
+            var config = serviceProvider.GetRequiredService<IConfiguration>();
+            var aspnetEnvironment = config.GetSection("ASPNET_ENVIRONMENT").Value;
+            Console.WriteLine($"ASPNET_ENVIRONMENT: {aspnetEnvironment}");
+
+            if (aspnetEnvironment == "Development")
+            {
+                return SqlConnectionProvider.CreateDbConnection;
+            }
+
+            return SqliteConnectionProvider.CreateDbConnection;
+        });
     }
-    ).Build();
+).Build();
 
 var app = host.Services.GetRequiredService<IDataAccess>();
 

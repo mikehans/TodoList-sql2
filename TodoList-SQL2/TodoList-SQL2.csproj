@@ -16,7 +16,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\TodoList.DataAccess.Sqlite\TodoList.DataAccess.Sqlite.csproj" />
+    <ProjectReference Include="..\TodoList.DataAccess.SqlServer\TodoList.DataAccess.SqlServer.csproj" />
     <ProjectReference Include="..\TodoList.DataAccess\TodoList.DataAccess.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
