@@ -4,12 +4,19 @@ using Microsoft.Extensions.Configuration;
 
 namespace TodoList.DataAccess.SqlServer;
 
-public static class SqlConnectionProvider
+public class SqlConnectionProvider : IDisposable
 {
+    static IDbConnection cn;
+
     public static IDbConnection CreateDbConnection(IConfiguration config)
     {
         var connectionString = config.GetConnectionString("SQLServerConnectionString");
-        IDbConnection cn = new SqlConnection(connectionString);
+        cn = new SqlConnection(connectionString);
         return cn;
+    }
+
+    public void Dispose()
+    {
+        Console.WriteLine($"{nameof(SqlConnectionProvider)}.Dispose()");
     }
 }

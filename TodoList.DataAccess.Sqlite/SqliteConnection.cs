@@ -4,12 +4,25 @@ using Microsoft.Extensions.Configuration;
 
 namespace TodoList.DataAccess.Sqlite;
 
-public static class SqliteConnectionProvider
+public class SqliteConnectionProvider :IDisposable
 {
-    public static IDbConnection CreateDbConnection(IConfiguration configuration)
+    private static IDbConnection cn;
+    public static IDbConnection CreateInMemoryDbConnection(IConfiguration configuration)
     {
         var connectionString = configuration.GetConnectionString("SQLiteInMemoryConnectionString");
-        var cn = new SqliteConnection(connectionString);
+        cn = new SqliteConnection(connectionString);
         return cn;
+    }
+    
+    public static IDbConnection CreateDbConnection(IConfiguration configuration)
+    {
+        var connectionString = configuration.GetConnectionString("SQLiteConnectionString");
+        cn = new SqliteConnection(connectionString);
+        return cn;
+    }
+
+    public void Dispose()
+    {
+        Console.WriteLine($"{nameof(SqliteConnectionProvider)}.Dispose()");
     }
 }

@@ -16,12 +16,12 @@ var host = Host.CreateDefaultBuilder(args).ConfigureServices(
             var aspnetEnvironment = config.GetSection("ASPNET_ENVIRONMENT").Value;
             Console.WriteLine($"ASPNET_ENVIRONMENT: {aspnetEnvironment}");
 
-            if (aspnetEnvironment == "Development")
+            return aspnetEnvironment switch
             {
-                return SqlConnectionProvider.CreateDbConnection;
-            }
-
-            return SqliteConnectionProvider.CreateDbConnection;
+                "Development" => SqlConnectionProvider.CreateDbConnection,
+                "Test" => SqliteConnectionProvider.CreateInMemoryDbConnection,
+                _ => SqliteConnectionProvider.CreateDbConnection
+            };
         });
     }
 ).Build();
